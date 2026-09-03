@@ -221,7 +221,7 @@ Die fachlichen Aufgabenstellungen basieren unter anderem auf Inhalten der **Tech
 
 Ein Projekt im Rahmen des Kurses „Wissenschaftskommunikation im MINT-Bereich“, Sommersemester 2026. Betreuung:
 
-Prof. Dr. Christina Völlmecke (Technische Universität Berlin)
+Prof. Dr. Christina Völlmecke (Technische Universität Berlin)/
 M. Sc. Narges Poursangari (Technische Universität Berlin)
 
 ---
@@ -426,7 +426,7 @@ The technical problems are based on topics from **Technical Mechanics 1**. One o
 
 Project developed in the course Science Communication in STEM, Summer 2026. Supervisors:
 
-Prof. Dr. Christina Völlmecke (Technical University Berlin)
+Prof. Dr. Christina Völlmecke (Technical University Berlin)/
 M. Sc. Narges Poursangari (Technical University Berlin)
 
 ---
