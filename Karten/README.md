@@ -1,0 +1,2 @@
+Im Rahmen des Projekts wurde Künstliche Intelligenz (KI) unterstützend eingesetzt. Dies betrifft insbesondere die Erstellung illustrierender Grafiken sowie die Gestaltung und Erstellung sich wiederholender Kartenelemente auf Grundlage eigener Vorgaben und Vorarbeiten.
+Die fachlichen Inhalte, das Spielkonzept sowie die grundlegenden Gestaltungs- und Arbeitsvorgaben wurden durch die Projektgruppe erarbeitet. Der Einsatz von KI diente dabei insbesondere der technischen und gestalterischen Unterstützung sowie der Umsetzung wiederkehrender Aufgaben.
