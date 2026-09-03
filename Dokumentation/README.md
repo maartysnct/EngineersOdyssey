@@ -1,0 +1,2 @@
+Im Rahmen des Projekts wurde Künstliche Intelligenz (KI) unterstützend eingesetzt. KI wurde bei der schriftlichen Ausarbeitung projektbezogener Texte eingesetzt, insbesondere zur Unterstützung bei Rechtschreibung, Formulierung und sprachlichem Ausdruck.
+Die fachlichen Inhalte, das Spielkonzept sowie die grundlegenden Gestaltungs- und Arbeitsvorgaben wurden durch die Projektgruppe erarbeitet. Der Einsatz von KI diente dabei insbesondere der technischen und sprachlichen Unterstützung sowie der Umsetzung wiederkehrender Aufgaben.
