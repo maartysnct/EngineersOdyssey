@@ -1,0 +1,30 @@
+- Grafiken einheitlich
+- Kommandokarten streichen aus der Anleitung
+- Freischnittkarten auch so benennen
+- Falschkarten in der Anzahl reduzieren auf 2
+- Spielen mit richtiger Zielgruppen
+- Anleitung - Karte muss gespielt werden, wenn man dran ist.
+- Was machen wir jemand nicht legen kann, weil die Karten zu weit weg sind?
+    - Wenn man keine Karte  für den passenden Schritt hat
+- Schritt muss auf Karte erkennbar sein
+- Kräfte-Insel vereinfachen
+- Gleichgewicht-Insel vereinfachen
+- Schnittgrößen-Insel vereinfachen
+- Pen and Paper in die Regeln/Beschreibung/Presi aufnehmen
+- Minispiele/Brücken konstruieren und drucken
+- Hinweise einführen - mit bei die Lösungen und alles in die Anleitung
+- Timer einheitlich in die Anleitung und Geschichte
+- Bilder machen - für Presentation und Anleitung und Story
+- Ideal geeignet für Studenten des ersten Semester fest in die Anleitung/Spielbeschreibung schreiben
+- Spieleranzahl festlegen (3 - 8) in max 3 Gruppen
+- Problemkarte größer drucken
+- Redeanteil festlegen
+- Nachbesprechung nach dem Spiel in die Anleitung rein
+- Schrittarten - Farben vereinheitlichen
+- Titel festlegen
+- Kartenhalter und Deko Drucken
+- Annahmekriterien/Qualitätscheck für einen Kartensatz festlegen
+    - Doppelkarten
+    - Grafiken lesbar
+    - Mathematisch korrekt
+    - Probegespielt

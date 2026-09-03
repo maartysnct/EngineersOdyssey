@@ -1,0 +1,268 @@
+Typische Prompts beim Erstellen der Karten
+============================================
+
+Diese Datei sammelt Befehle und Chat-Prompts, die beim Bauen der
+Karten-Weltkarte (Inseln) und der dazugehoerigen Kartensets verwendet werden.
+
+
+1. WORKFLOW: KARTEN AUS PDF ERSTELLEN
+--------------------------------------
+
+Schritt 1: PDF analysieren und CSV erzeugen
+    python Karten\pdf_to_cards.py --input Inseln\<Thema>\<Aufgabe>.pdf --output Inseln\<Thema>
+
+Schritt 2: CSV auf Fehler pruefen und PDF rendern
+    python Karten\table_to_pdf.py --csv "Inseln\<Thema>\<Aufgabe>_cards.csv" --outdir "Inseln\<Thema>\_out"
+
+Schritt 3: Druckversion mit Rueckseite erzeugen
+    python Karten\prepare_print_pdf.py Inseln\<Thema>\_out\<ProblemID>_Karten.pdf --backside Karten\backsides\<motiv>.png --out Inseln\<Thema>\_out\<ProblemID>_print.pdf
+
+Beispiel:
+    python Karten\pdf_to_cards.py --input Inseln\Fachwerke\Fachwerk.pdf --output Inseln\Fachwerke
+    python Karten\table_to_pdf.py --csv "Inseln\Fachwerke\fachwerke_cards.csv" --outdir "Inseln\Fachwerke\_out"
+    python Karten\prepare_print_pdf.py Inseln\Fachwerke\_out\Fachwerk_1_Karten.pdf --backside Karten\backsides\fachwerk.png --out Inseln\Fachwerke\_out\Fachwerk_1_print.pdf
+
+
+2. QUALITAETSSICHERUNG: CASCADES PROMPTS
+-----------------------------------------
+
+A. Grundsaetzliche Korrektur einer CSV
+    "Bitte pruefe @[Inseln/<Thema>/<Aufgabe>_cards.csv] auf inhaltliche und
+    technische Fehler. Behebe falsche Wahrheitswerte, fehlerhafte pic_dict-Formeln
+    und problematische Unicode-Zeichen in den Content-Spalten. Ersetze sie durch
+    ASCII-kompatible Darstellungen."
+
+B. Problemkarte mit Bild statt Matplotlib
+    "In @[Inseln/<Thema>/<Aufgabe>_cards.csv] soll die Problemkarte die Grafik
+    @[Inseln/<Thema>/<bild>.png] verwenden. Ersetze das matplotlib-pic_dict durch
+    ein image-pic_dict mit dem Pfad zur PNG."
+
+C. Variablen auf die Problemkarte schreiben
+    "Ergänze die Problemkarte in @[Inseln/<Thema>/<Aufgabe>_cards.csv]. Schreibe
+    die gegebenen Werte und die gesuchten Grössen in die content2/content3 Felder.
+    Nutze ASCII-kompatible Notation (z.B. A_z statt A_y)."
+
+D. Loesungskarte ergaenzen oder korrigieren
+    "Fuege am Ende von @[Inseln/<Thema>/<Aufgabe>_cards.csv] eine Loesungskarte
+    hinzu. In content1 steht: 'Richtige Karten: <IDs>'. Liste alle IDs der Karten
+    mit Wahrheitswert 'Wahr' auf, die zum Loesungsweg gehoeren."
+
+E. Karten nach Loesungsweg sortieren
+    "Ordne die Karten in @[Inseln/<Thema>/<Aufgabe>_cards.csv] so um, dass sie
+    dem Loesungsweg folgen: Problemkarte -> Variabelkarten -> Formelkarten ->
+    Rechenschrittkarten -> Zwischenergebniskarten -> Ergebniskarte -> falsche
+    Karten (Fallen) -> Loesungskarte."
+
+
+3. TYPISCHE REPARATURPROMPTS
+-----------------------------
+
+A. Formel-Rendering-Fehler (z.B. unbekannte LaTeX-Befehle)
+    "In @[Inseln/<Thema>/<Aufgabe>_cards.csv] schlaegt das Formel-Rendering fehl.
+    Ersetze problematische LaTeX-Befehle wie \\tfrac durch \\frac und pruefe alle
+    pic_dict-Felder auf mathtext-Kompatibilitaet."
+
+B. Bild-Pfad korrigieren
+    "Die Problemkarte in @[Inseln/<Thema>/<Aufgabe>_cards.csv] zeigt kein Bild.
+    Pruefe, ob der Pfad im image-pic_dict relativ zum Projektstamm korrekt ist
+    und die Datei existiert."
+
+C. CSV-Kommas escapen
+    "Pruefe in @[Inseln/<Thema>/<Aufgabe>_cards.csv], ob alle Felder mit Kommas
+    (z.B. Formeln, Listen) korrekt in Anfuehrungszeichen eingeschlossen sind.
+    Repariere fehlerhafte Zeilen."
+
+D. Wahrheitswerte pruefen
+    "Kontrolliere in @[Inseln/<Thema>/<Aufgabe>_cards.csv], dass jede Karte einen
+    Wahrheitswert 'Wahr' oder 'Falsch' hat. Problemkarte, Formelkarte,
+    Ergebniskarte und Loesungskarte muessen 'Wahr' sein. Fallen muessen 'Falsch'
+    sein."
+
+E. Ressourcen-Summe pruefen
+    "In @[Inseln/<Thema>/<Aufgabe>_cards.csv] duerfen die Ressourcen pro Karte
+    maximal 5 ergeben. Problemkarte, Ergebniskarte, Zwischenergebniskarte und
+    Loesungskarte erhalten '{}'. Variabelkarten und Rechenschrittkarten
+    erhalten 1-5 Ressourcen je nach Schwierigkeit."
+
+
+4. KONVENTIONEN UND ERFOLGSKONTROLLE
+-------------------------------------
+
+A. Wahrheitswerte
+    - Problemkarte: Wahr
+    - Variabelkarte: Wahr (richtig) oder Falsch (Falle)
+    - Formelkarte: Wahr
+    - Rechenschrittkarte: Wahr (richtig) oder Falsch (Falle)
+    - Zwischenergebniskarte: Wahr (richtig) oder Falsch (Falle)
+    - Ergebniskarte: Wahr
+    - Loesungskarte: Wahr
+    - NIE sichtbare Hinweise wie 'RICHTIG' oder 'FALSCH' auf die Karten schreiben!
+
+B. pic_dict Typen
+    - {"type": "image", "path": "Relativer/Pfad/zum/Bild.png"}  -> fuer Problemkarten mit eigener Skizze
+    - {"type": "matplotlib", "code": "EINZEILIGER Code mit ;"}  -> fuer selbst gezeichnete Diagramme
+    - {"type": "formula", "latex": "LaTeX-Formel"}             -> fuer alle Formel-, Rechenschritt- und Ergebniskarten
+    - {"type": "none"}                                         -> nur fuer Loesungskarten oder reine Textkarten
+
+C. LaTeX-Regeln fuer mathtext
+    - Keine LaTeX-Umgebungen wie \\begin{array}, \\begin{aligned}, \\begin{equation}
+    - Erlaubt: \\frac, \\sqrt, \\vec, \\cdot, \\alpha, \\sin, \\cos, \\text, ^, _
+    - Dezimalzahlen im deutschen Format: 7{,}5 (nicht 7.5 in LaTeX)
+    - Keine 3D-Plots oder ax.quiver() mit 6 Argumenten in matplotlib
+
+D. Farbschema
+    - Alle Karten einer Aufgabe nutzen ein konsistentes Farbschema.
+    - Beispiele: Blau (128,180,220), Rot (200,100,100), Gruen (100,180,100)
+    - Hintergrundfarbe und Headerfarbe duerfen leicht variieren, sollten aber
+      zusammenpassen.
+
+
+5. NEUE INSEL/NEUE AUFGABE ANLEGEN
+-----------------------------------
+
+1. Neues Verzeichnis unter Inseln/ anlegen, z.B. Inseln/<Thema>/
+2. PDF mit der Aufgabenstellung dort ablegen.
+3. Befehl ausfuehren:
+       python Karten\pdf_to_cards.py --input Inseln\<Thema>\<Aufgabe>.pdf --output Inseln\<Thema>
+4. CSV manuell pruefen und korrigieren:
+       - Layout ueberall auf L-TopImg setzen
+       - ProblemID konsistent halten
+       - Wahrheitswerte pruefen
+       - pic_dict auf mathtext-Kompatibilitaet pruefen
+       - Loesungskarte ergaenzen und richtige IDs eintragen
+5. PDF rendern:
+       python Karten\table_to_pdf.py --csv "Inseln\<Thema>\<Aufgabe>_cards.csv" --outdir "Inseln\<Thema>\_out"
+6. Druckversion erzeugen:
+       python Karten\prepare_print_pdf.py Inseln\<Thema>\_out\<ProblemID>_Karten.pdf --backside Karten\backsides\<motiv>.png --out Inseln\<Thema>\_out\<ProblemID>_print.pdf
+7. PDF durchblaettern und bei Fehlern erneut korrigieren.
+
+
+8. TYPISCHE CHAT-PROMPTS (BEISPIELE ZUM KOPIEREN)
+--------------------------------------------------
+
+A. Ressourcen einer CSV auf eine einzelne Resource umstellen
+    "Jetzt muessen die Resourcen in @[Inseln/<Thema>/<Aufgabe>_cards.csv]
+    ueberarbeitet werden. Es soll nur noch die Resource @[Karten/icons/baustoffe.png]
+    geben. Auf die Tabelle sollen in Summe <X> Resourcen vergeben werden, wobei
+    Ressourcen an Falsche-Karten nicht mitgezaehlt werden. Eine Karte und ihre
+    Falschen Alternativen sollen jeweils die gleiche Anzahl an Resourcen bekommen.
+    Bitte nur Aenderungen an der Resourcenspalte vornehmen."
+
+B. Icon-Groesse im Renderer aendern
+    "Jetzt kann das Icon in @[Karten/table_to_pdf.py] vergroessert werden. Bitte
+    die Groesse in der Resource-Overlay-Funktion von 22 mm auf 30 mm aendern."
+
+C. Resource-Name in der Code-Whitelist ergaenzen
+    "Die Resource 'baustoffe' wird in @[Karten/table_to_pdf.py] und/oder
+    @[Karten/pdf_to_cards/converter.py] nicht erkannt. Bitte 'baustoffe' in die
+    'allowed'-Liste der Resource-Parser aufnehmen."
+
+D. Problemkarte zeigt kein Bild / wird uebersprungen
+    "Die Problemkarte in @[Inseln/<Thema>/<Aufgabe>_cards.csv] wird beim
+    Umwandeln in PDF uebersprungen / zeigt kein Bild. Bitte pruefen, ob die
+    'print'-Spalte auf 1 steht und ob der Bildpfad im pic_dict korrekt ist."
+
+E. Formelzeichen korrigieren
+    "Fast alle Formelzeichen sind nicht wie vorgegeben. Bitte in
+    @[Inseln/<Thema>/<Aufgabe>_cards.csv] die Formelzeichen auf S, G, N, ...
+    (je nach Fachgebiet) anpassen."
+
+F. Grafiken wieder in die CSV einfuegen
+    "Bring die Grafiken in @[Inseln/<Thema>/<Aufgabe>_cards.csv] wieder rein.
+    Pfade muessen relativ zum Projektstamm sein und die Bilder muessen existieren."
+
+G. Loesungskarte korrigieren / ergaenzen
+    "Fuege am Ende der CSV eine Loesungskarte hinzu. In content1 sollen die
+    IDs aller richtigen Karten des Loesungswegs stehen:
+    'Richtige Karten: <ID1>, <ID2>, ...'"
+
+H. CSV auf Fehler pruefen
+    "Pruefe @[Inseln/<Thema>/<Aufgabe>_cards.csv] auf inhaltliche und technische
+    Fehler: Wahrheitswerte, pic_dict-Formeln, Bildpfade, Kommas in Textfeldern,
+    Ressourcen. Behebe die Fehler."
+
+I. Druckversion erzeugen
+    "Erstelle aus @[Inseln/<Thema>/_out/<ProblemID>_Karten.pdf] eine Druckversion
+    mit der Rueckseite @[Karten/backsides/<motiv>.png] und speichere sie als
+    <ProblemID>_print.pdf."
+
+J. Resource-Icon auf Karten fehlt
+    "Ich kann das Icon fuer die Ressourcen auf den generierten Karten nicht
+    finden. Bitte pruefe, ob der Dateiname in @[Karten/icons/] exakt mit dem
+    Resource-Schluessel in der CSV uebereinstimmt (Gross-/Kleinschreibung)."
+
+
+9. WAS MACHT EINE GUTE KARTE AUS?
+-----------------------------------
+
+Diese Regeln entstanden beim manuellen Ueberarbeiten von cards.csv-Dateien.
+Sie beschreiben, wie eine Karte inhaltlich und technisch korrekt aussehen soll.
+
+
+A. Inline-LaTeX in den content-Spalten
+    - Alle Variablen und Formeln in content1, content2, content3 werden mit
+      $...$-Inline-LaTeX geschrieben (z.B. $F$, $S_{AB}$, $\alpha$, $\beta$).
+    - Reiner Beschreibungstext bleibt unformatiert (kein LaTeX fuer Woerter).
+    - Beispiel gut:   "Freischnitt mit Kraefte $S$, $N$ und $G$"
+    - Beispiel schlecht: "Freischnitt mit Kraeften S, N und G"
+
+B. Keine Fehlerbeschreibungen in den content-Spalten
+    - Falsch-Karten duerfen NICHT beschreiben, warum ein Eintrag falsch ist.
+    - Nicht: "Falsche Stabbezeichnung", "Winkel vertauscht", "Kraft verteilt sich"
+    - Stattdessen: Text formulieren als waere die Aussage korrekt — identisch
+      oder sinngemaeß wie bei der wahren Karte desselben Typs.
+    - Beispiel gut (Falsch-Karte):  "Freischnitt mit Kraeften $S$, $N$ und $G$"
+    - Beispiel schlecht (Falsch-Karte): "Falscher Freischnitt: $N$ fehlt"
+
+C. Keine konkreten Zahlenwerte in content und Formeln
+    - In den content-Spalten und der Formeln-Spalte duerfen keine absoluten
+      Zahlenwerte stehen (z.B. nicht 10 kN, nicht 12.5 kN, nicht 20 kN).
+    - Ausnahme: Karten, bei denen der Zahlenwert das eigentliche Lernziel ist
+      (z.B. Kräfte-Aufgabe mit vorgegebenen Werten).
+    - Stattdessen: symbolische Ausdruecke als Vielfaches der gegebenen Groessen
+      (z.B. $F$, $F/2$, $G\sin\alpha$, $5F/8$).
+
+D. Duplikate zwischen content und pic_dict entfernen
+    - Wenn content1/2/3 dasselbe darstellt wie der Inhalt des pic_dict
+      (z.B. eine Formel, die auch als Grafik erscheint), wird die content-Spalte
+      geleert.
+    - Ziel: keine redundante Information auf der Karte.
+
+E. Hintergrundfarben konsistent und nach Kartentyp abgestuft
+    - Alle Karten einer Aufgabe basieren auf der Basisfarbe aus farbe.txt.
+    - Jeder Kartentyp bekommt eine leicht abweichende Toenung der Basisfarbe:
+        Problemkarte / Loesungskarte: Basisfarbe (unveraendert)
+        Variabelkarte:                leicht abgedunkelt (~5 Punkte weniger)
+        Rechenschrittkarte:           etwas staerker abgedunkelt (~10-15 Punkte)
+        Ergebniskarte:                leicht heller als Basisfarbe
+    - Alle Werte als RGB-Tripel in der Hintergrundfarbe-Spalte (z.B. "177,230,70").
+
+F. Typischer-Fehler-Karten nicht drucken
+    - Karten mit dem Titel "Typischer Fehler" bekommen print=0.
+    - Sie sind im CSV vorhanden (fuer die Spiellogik), erscheinen aber nicht im PDF.
+
+G. Alle Karten einer Aufgabe gehoeren zur selben ProblemID
+    - ProblemID und Aufgabennummer muessen in allen Zeilen identisch sein.
+    - Nur so erzeugt table_to_pdf.py eine einzige PDF-Datei.
+    - Fehler: Gemischte ProblemIDs (z.B. "Gleichgewicht_1" und "1.1") fuehren
+      zu zwei separaten PDFs.
+
+H. Formeln-Spalte korrekt escapen
+    - Werte in der Formeln-Spalte, die $-Zeichen oder Backslashes enthalten,
+      muessen in Anfuehrungszeichen eingeschlossen werden.
+    - Beispiel gut:   "$\Sigma F_x = 0$" -> als CSV-Feld: "$\Sigma F_x = 0$"
+    - Ohne Anfuehrungszeichen verschiebt das $-Zeichen den CSV-Parser und
+      die Hintergrundfarbe-Spalte wird falsch gelesen => Karte ohne Farbe.
+
+I. Prompt fuer vollstaendige Ueberarbeitung einer CSV
+    "Passe die Tabelle @[Inseln/<Thema>/<Aufgabe>/cards.csv] nach folgenden
+    Regeln an:
+    - Inline LaTeX: Formeln in content1/2/3 als $...$, Variablen immer als LaTeX,
+      reiner Text unformatiert.
+    - Duplikate loeschen: Leere content-Spalte, falls sie dasselbe zeigt wie pic_dict.
+    - Keine Fehlerbeschreibungen: Falsch-Karten wie Wahr-Karten formulieren.
+    - Keine Zahlenwerte: Ersetze Zahlen durch symbolische Ausdruecke.
+    - Hintergrundfarben: Leichte Abstufungen der Basisfarbe aus
+      @[Inseln/<Thema>/<Aufgabe>/farbe.txt], je Kartentyp.
+    - Typischer-Fehler-Karten: print=0.
+    - Alle Karten: gleiche ProblemID und Aufgabennummer."
