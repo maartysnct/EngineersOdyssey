@@ -219,6 +219,11 @@ Die Aufgabenbereiche umfassten unter anderem:
 
 Die fachlichen Aufgabenstellungen basieren unter anderem auf Inhalten der **Technischen Mechanik 1**. Als fachliche Grundlage wurde unter anderem *Technische Mechanik 1: Statik* von Dietmar Gross, Werner Hauger, Jörg Schröder und Wolfgang A. Wall verwendet.
 
+Ein Projekt im Rahmen des Kurses „Wissenschaftskommunikation im MINT-Bereich“, Sommersemester 2026. Betreuung:
+
+Prof. Dr. Christina Völlmecke (Technische Universität Berlin)
+M. Sc. Narges Poursangari (Technische Universität Berlin)
+
 ---
 
 # 🇬🇧 English Version
@@ -390,6 +395,7 @@ They were used, among other things, for **illustrative images**, repetitive card
 
 The technical content, game concept and fundamental development of the game were developed independently within the project.
 
+
 ---
 
 ## 📜 License
@@ -416,5 +422,11 @@ The project included work on:
 * Testing and feedback
 
 The technical problems are based on topics from **Technical Mechanics 1**. One of the references used for the technical content is *Technische Mechanik 1: Statik* by Dietmar Gross, Werner Hauger, Jörg Schröder and Wolfgang A. Wall.
+
+
+Project developed in the course Science Communication in STEM, Summer 2026. Supervisors:
+
+Prof. Dr. Christina Völlmecke (Technical University Berlin)
+M. Sc. Narges Poursangari (Technical University Berlin)
 
 ---
