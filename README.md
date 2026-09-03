@@ -225,6 +225,15 @@ Prof. Dr. Christina Völlmecke (Technische Universität Berlin)/
 M. Sc. Narges Poursangari (Technische Universität Berlin)
 
 ---
+Teile dieses Werkes sind lizenziert unter der Creative Commons Namensnennung – Nicht kommerziell – Weitergabe unter gleichen Bedingungen 4.0 International Lizenz (CC BY-NC-SA 4.0).
+
+Sie dürfen dieses Material unter den folgenden Bedingungen teilen und bearbeiten:
+
+Namensnennung – Sie müssen angemessene Urheber- und Quellenangaben machen.
+Nicht kommerziell – Das Material darf nicht für kommerzielle Zwecke verwendet werden.
+Weitergabe unter gleichen Bedingungen – Bearbeitungen des Materials müssen unter derselben Lizenz weitergegeben werden.
+
+Den vollständigen Lizenztext finden Sie unter der Creative Commons Namensnennung – Nicht kommerziell – Weitergabe unter gleichen Bedingungen 4.0 International Lizenz.
 
 # 🇬🇧 English Version
 
@@ -430,3 +439,13 @@ Prof. Dr. Christina Völlmecke (Technical University Berlin)/
 M. Sc. Narges Poursangari (Technical University Berlin)
 
 ---
+Parts of this work are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+
+You are free to share and adapt this material under the following conditions:
+
+Attribution – Appropriate credit must be given.
+NonCommercial – The material may not be used for commercial purposes.
+ShareAlike – Adapted material must be distributed under the same license.
+
+For the full license terms, see the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
