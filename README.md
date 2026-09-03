@@ -198,14 +198,6 @@ Die einzelnen Bestandteile des Projekts können unterschiedliche Lizenzen besitz
 
 Die jeweilige Lizenz ist deshalb **direkt im entsprechenden Ordner** angegeben.
 
-Insbesondere ist zwischen folgenden Bereichen zu unterscheiden:
-
-* `Python/` – Quellcode
-* `Karten/` – Spiel- und Lernmaterialien
-* `Grafiken/` – Illustrationen und weitere Grafiken
-* `3D-Modelle/` – 3D-Druck- und Modelldateien
-* `Dokumentation/` – Projektdokumentation
-
 **Materialien und Inhalte Dritter sind von einer eigenen Projektlizenz ausgenommen.** Für diese gelten die jeweiligen Rechte und Lizenzbedingungen der ursprünglichen Quelle.
 
 ---
@@ -405,14 +397,6 @@ The technical content, game concept and fundamental development of the game were
 Different parts of the project may be subject to different licenses.
 
 The applicable license is therefore specified **within the respective folder**.
-
-In particular, the repository distinguishes between:
-
-* `Python/` – source code
-* `Karten/` – educational and game materials
-* `Grafiken/` – illustrations and graphics
-* `3D-Modelle/` – 3D-print and model files
-* `Dokumentation/` – project documentation
 
 **Third-party materials and content are excluded from the project's own licenses.** Their respective copyright and license conditions continue to apply.
 
